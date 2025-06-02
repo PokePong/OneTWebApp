@@ -1,3 +1,4 @@
+using MudBlazor.Services;
 using OneTWebApp.Client.Pages;
 using OneTWebApp.Components;
 
@@ -7,6 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
+
+//> Added MudBlazor
+builder.Services.AddMudServices();
 
 var app = builder.Build();
 

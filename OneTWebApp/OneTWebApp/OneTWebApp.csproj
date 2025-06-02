@@ -8,6 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="MudBlazor" Version="8.7.0" />
+        <PackageReference Include="MudBlazor.ThemeManager" Version="3.0.0" />
         <ProjectReference Include="..\OneTWebApp.Client\OneTWebApp.Client.csproj"/>
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.0.5"/>
     </ItemGroup>
