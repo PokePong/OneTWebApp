@@ -1,7 +1,7 @@
-namespace OneTWebApp.Models;
+namespace OneTWebApp.Client.Models;
 
 public class AppModel {
-    public bool Deployed { get; set; }
+    public DeployState DeployedState { get; set; }
 
     public AppType AppType { get; set; }
 

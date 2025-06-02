@@ -1,6 +1,6 @@
-using OneTWebApp.Models;
+using OneTWebApp.Client.Models;
 
-namespace OneTWebApp.Utils;
+namespace OneTWebApp.Client.Utils;
 
 public static class ImageUtils {
     public static string GetIconAppPath(AppType type) => type switch {

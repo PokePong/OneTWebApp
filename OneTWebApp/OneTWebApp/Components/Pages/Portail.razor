@@ -1,5 +1,6 @@
 @page "/"
-@using OneTWebApp.Models
+@using OneTWebApp.Client.Models
+@using OneTWebApp.Client.Components
 
 <style>
     .gradient-background {
@@ -60,12 +61,12 @@
         _apps = [
             new AppModel {
                 AppType = AppType.Docs,
-                Deployed = false,
+                DeployedState = DeployState.Undeployed,
                 Version = "2.1.3"
             },
             new AppModel {
                 AppType = AppType.Tchap,
-                Deployed = true,
+                DeployedState = DeployState.Undeployed,
                 Version = "1.0.1"
             }
         ];

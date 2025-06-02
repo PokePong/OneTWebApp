@@ -1,5 +1,9 @@
-@using OneTWebApp.Models
-@using OneTWebApp.Utils
+@using OneTWebApp.Client.Models
+@using OneTWebApp.Client.Utils
+@using MudBlazor
+
+@rendermode InteractiveAuto
+
 <MudPaper Elevation="3"
           Class="rounded-3"
           Style="background-color: white; width: 250px; height: 300px">
@@ -26,19 +30,8 @@
             </MudText>
         </MudStack>
 
-        @if (AppModel.Deployed) {
-            <MudButton Color="Color.Error"
-                       Variant="Variant.Outlined">
-                Destroy
-            </MudButton>
-        }
-        else {
-            <MudButton Color="Color.Success"
-                       Variant="Variant.Filled">
-                Deploy
-            </MudButton>
-        }
-
+        <DeployStateButton State="AppModel.DeployedState"
+                           Click="OnClick"/>
     </MudStack>
 </MudPaper>
 
@@ -46,6 +39,18 @@
 
     [Parameter] public AppModel AppModel { get; set; }
 
-    private Color BadgeColor => AppModel.Deployed ? Color.Success : Color.Error;
+    private Color BadgeColor =>
+        AppModel.DeployedState switch {
+            DeployState.Undeployed => Color.Default,
+            DeployState.Deploying => Color.Warning,
+            DeployState.Deployed => Color.Success,
+            DeployState.Failed => Color.Error,
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
+    private void OnClick() {
+        AppModel.DeployedState = (DeployState)(((int)AppModel.DeployedState + 1) % 4);
+    }
+
 
 }

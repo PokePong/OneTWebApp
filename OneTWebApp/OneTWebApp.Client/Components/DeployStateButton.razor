@@ -1,0 +1,50 @@
+@using MudBlazor
+@using OneTWebApp.Client.Models
+
+@rendermode InteractiveAuto
+
+@switch (State) {
+    case DeployState.Undeployed:
+        <MudButton Color="Color.Success"
+                   Variant="Variant.Filled"
+                   StartIcon="@Icons.Material.Filled.CloudUpload"
+                   OnClick="OnInternalClickAsync">
+            Deploy
+        </MudButton>
+        break;
+    case DeployState.Deploying:
+        <MudButton Color="Color.Success"
+                   Variant="Variant.Outlined"
+                   OnClick="OnInternalClickAsync">
+            Deploying
+        </MudButton>
+        break;
+    case DeployState.Deployed:
+        <MudButton Color="Color.Error"
+                   Variant="Variant.Outlined"
+                   StartIcon="@Icons.Material.Filled.DoNotDisturbAlt"
+                   OnClick="OnInternalClickAsync">
+            Terminate
+        </MudButton>
+        break;
+    case DeployState.Failed:
+        <MudButton Color="Color.Error"
+                   Variant="Variant.Outlined"
+                   StartIcon="@Icons.Material.Filled.Autorenew"
+                   OnClick="OnInternalClickAsync">
+            Retry
+        </MudButton>
+        break;
+    default:
+        throw new ArgumentOutOfRangeException();
+}
+
+@code {
+    [Parameter] public DeployState State { get; set; }
+    [Parameter] public EventCallback Click { get; set; }
+
+    private async Task OnInternalClickAsync() {
+        await Click.InvokeAsync();
+    }
+
+}
