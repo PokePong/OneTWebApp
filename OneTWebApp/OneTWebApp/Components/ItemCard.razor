@@ -1,0 +1,36 @@
+<MudPaper Elevation="3"
+          Class="rounded-3"
+          Style="background-color: white; width: 250px; height: 300px">
+    <MudStack AlignItems="AlignItems.Center"
+              Justify="Justify.SpaceBetween"
+              Class="w-100 h-100 py-2">
+
+        <MudStack Spacing="1">
+            <MudBadge Dot="false" Overlap="true" Color="Color.Error" Class="mt-4">
+                <MudAvatar Style="height:70px; width:70px; font-size:2rem;"
+                           Class="p-2"
+                           Color="Color.Primary"
+                           Variant="Variant.Outlined">
+                    <MudImage Src="Images/icon-docs.png"></MudImage>
+                </MudAvatar>
+            </MudBadge>
+            <MudText Typo="Typo.h5"
+                     Align="Align.Center">
+                <b>Docs</b>
+            </MudText>
+            <MudText Typo="Typo.body2"
+                     Align="Align.Center">
+                v2.3.5
+            </MudText>
+        </MudStack>
+
+        <MudButton Color="Color.Success"
+                   Variant="Variant.Filled">
+            Deploy
+        </MudButton>
+    </MudStack>
+</MudPaper>
+
+@code {
+
+}
