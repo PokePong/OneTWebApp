@@ -5,19 +5,27 @@
     .gradient-background {
         background: radial-gradient(
             ellipse at top center,
-            #ffb3b3 0%,      /* centre intense */
-            #ffcdd2 20%,     /* autour du centre */
-            #ffe4f0 40%,     /* dégradé intermédiaire */
-            #ffffff 90%      /* fade-out */
+            #ffb3b3 0%,
+            #ffcdd2 20%,
+            #ffe4f0 40%,
+            #ffffff 90%
         );
         width: 100vw;
         height: 100vh;
-        padding: 0px 0px;
-        box-sizing: border-box;
+    }
+    
+    .down {
+        margin-top: 75px;
+    }
+
+    body, html {
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
     }
 </style>
 
-<div class="gradient-background overflow-hidden">
+<div class="gradient-background">
     
     <MudGrid AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
         <MudItem xs="3" class="d-flex justify-center align-center">
@@ -34,7 +42,7 @@
 
         @foreach (var app in _apps)
         {
-            <MudItem xs="12" sm="6" class="d-flex justify-center">
+            <MudItem xs="12" sm="6" class="d-flex justify-center down">
                 <ItemCard AppModel="app"/>
             </MudItem>
         }
@@ -62,6 +70,4 @@
             }
         ];
     }
-
-
 }
