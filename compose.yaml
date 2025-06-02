@@ -1,10 +1,4 @@
 ﻿services:
-  onetwebapp.client:
-    image: onetwebapp.client
-    build:
-      context: .
-      dockerfile: OneTWebApp/OneTWebApp.Client/Dockerfile
-
   onetwebapp:
     image: onetwebapp
     build:
