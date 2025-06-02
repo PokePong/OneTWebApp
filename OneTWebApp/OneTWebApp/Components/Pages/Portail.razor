@@ -1,27 +1,46 @@
 @page "/"
 @using OneTWebApp.Models
 
-<MudGrid AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
-    <MudItem xs="3" class="d-flex justify-center align-center">
-        <MudImage Src="Images/icon-s3ns.png" Alt="s3nsImage" Width="100"/>
-    </MudItem>
-
-    <MudItem xs="6" class="d-flex justify-center align-center">
-        <MudText Typo="Typo.h5" Align="Align.Center">Portail S3NS</MudText>
-    </MudItem>
-
-    <MudItem xs="3" class="d-flex justify-center align-center">
-        <MudImage Src="Images/icon-suitenumerique.png" Alt="suiteNumericImage" Width="150"/>
-    </MudItem>
-</MudGrid>
-
-<MudGrid>
-    @foreach (var app in _apps) {
-        <MudItem xs="12" sm="6" class="d-flex justify-center">
-            <ItemCard AppModel="app"/>
-        </MudItem>
+<style>
+    .gradient-background {
+        background: radial-gradient(
+            ellipse at top center,
+            #ffb3b3 0%,      /* centre intense */
+            #ffcdd2 20%,     /* autour du centre */
+            #ffe4f0 40%,     /* dégradé intermédiaire */
+            #ffffff 90%      /* fade-out */
+        );
+        width: 100vw;
+        height: 100vh;
+        padding: 0px 0px;
+        box-sizing: border-box;
     }
-</MudGrid>
+</style>
+
+<div class="gradient-background overflow-hidden">
+    
+    <MudGrid AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+        <MudItem xs="3" class="d-flex justify-center align-center">
+            <MudImage Src="Images/icon-s3ns.png" Alt="s3nsImage" Width="100"/>
+        </MudItem>
+
+        <MudItem xs="6" class="d-flex justify-center align-center">
+            <MudText Typo="Typo.h5" Align="Align.Center">Portail S3NS</MudText>
+        </MudItem>
+
+        <MudItem xs="3" class="d-flex justify-center align-center">
+            <MudImage Src="Images/icon-suiteNumerique.png" Alt="suiteNumericImage" Width="150"/>
+        </MudItem>
+
+        @foreach (var app in _apps)
+        {
+            <MudItem xs="12" sm="6" class="d-flex justify-center">
+                <ItemCard AppModel="app"/>
+            </MudItem>
+        }
+    </MudGrid>
+    
+</div>
 
 
 @code {
