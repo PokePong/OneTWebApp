@@ -5,28 +5,30 @@
 <link rel="stylesheet" href="css/Portail.css">
 
 <div class="gradient-background">
-    
-    <MudGrid AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
-        <MudItem xs="3" class="d-flex justify-center align-center">
-            <MudImage Src="Images/icon-s3ns.png" Alt="s3nsImage" Width="100"/>
-        </MudItem>
 
-        <MudItem xs="6" class="d-flex justify-center align-center">
-            <MudText Typo="Typo.h5" Align="Align.Center">Portail S3NS</MudText>
-        </MudItem>
+    <MudStack Row="true"
+              AlignItems="AlignItems.Center"
+              Justify="Justify.SpaceBetween">
+        <MudImage Src="Images/icon-s3ns.png" Alt="s3nsImage" Width="100"/>
+        <MudImage Src="Images/icon-suitenumerique.png" Alt="suiteNumericImage" Width="150"/>
+    </MudStack>
 
-        <MudItem xs="3" class="d-flex justify-center align-center">
-            <MudImage Src="Images/icon-suiteNumerique.png" Alt="suiteNumericImage" Width="150"/>
-        </MudItem>
+    <MudText Typo="Typo.h3" Align="Align.Center">
+        <b>Welcome to S3NS x LaSuite Portal!</b>
+    </MudText>
 
-        @foreach (var app in _apps)
-        {
+    <MudSpacer/>
+
+    <ResumeInsight Apps="_apps"/>
+
+    <MudGrid Justify="Justify.SpaceBetween">
+        @foreach (var app in _apps) {
             <MudItem xs="12" sm="6" class="d-flex justify-center down">
                 <ItemCard AppModel="app"/>
             </MudItem>
         }
     </MudGrid>
-    
+
 </div>
 
 
