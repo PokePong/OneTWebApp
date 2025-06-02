@@ -1,0 +1,11 @@
+using OneTWebApp.Models;
+
+namespace OneTWebApp.Utils;
+
+public static class ImageUtils {
+    public static string GetIconAppPath(AppType type) => type switch {
+        AppType.Docs => "Images/icon-docs.png",
+        AppType.Tchap => "Images/icon-tchap.png",
+        _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+    };
+}
