@@ -1,0 +1,66 @@
+@using OneTWebApp.Client.Models
+@using MudBlazor
+
+@rendermode InteractiveAuto
+
+<MudStack Row="true"
+          Spacing="6"
+          AlignItems="AlignItems.Center"
+          Justify="Justify.Center">
+    <MudStack Row="true"
+              Spacing="3"
+              AlignItems="AlignItems.Center"
+              Justify="Justify.Center">
+        <MudText Align="Align.Center"
+                 Color="Color.Primary"
+                 Typo="Typo.h4">
+            <b>@(Apps.Length)</b>
+        </MudText>
+        <MudText Align="Align.Center"
+                 Color="Color.Default"
+                 Typo="Typo.h4">
+            Projects
+        </MudText>
+    </MudStack>
+    <MudStack Row="true"
+              Spacing="3"
+              AlignItems="AlignItems.Center"
+              Justify="Justify.Center">
+        <MudText Align="Align.Center"
+                 Color="Color.Success"
+                 Typo="Typo.h4">
+            <b>@Apps.Select(model => model.DeployedState == DeployState.Deployed).Count()</b>
+        </MudText>
+        <MudText Align="Align.Center"
+                 Color="Color.Default"
+                 Typo="Typo.h5">
+            Deployments
+        </MudText>
+    </MudStack>
+    <MudStack Row="true"
+              Spacing="3"
+              AlignItems="AlignItems.Center"
+              Justify="Justify.Center">
+        <MudText Align="Align.Center"
+                 Color="Color.Error"
+                 Typo="Typo.h4">
+            <b>@Apps.Select(model => model.DeployedState == DeployState.Failed).Count()</b>
+        </MudText>
+        <MudText Align="Align.Center"
+                 Color="Color.Default"
+                 Typo="Typo.h5">
+            Errors
+        </MudText>
+    </MudStack>
+
+</MudStack>
+
+@code {
+
+    [Parameter] public AppModel[] Apps { get; set; }
+
+    protected override void OnInitialized() {
+        base.OnInitialized();
+    }
+
+}
