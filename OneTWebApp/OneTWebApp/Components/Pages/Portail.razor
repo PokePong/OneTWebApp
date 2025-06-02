@@ -36,8 +36,9 @@
 
     private AppModel[] _apps;
 
-    protected override void OnInitialized() {
-        base.OnInitialized();
+    protected override async Task OnInitializedAsync() {
+        await base.OnInitializedAsync();
+
         _apps = [
             new AppModel {
                 AppType = AppType.Docs,
@@ -50,5 +51,9 @@
                 Version = "1.0.1"
             }
         ];
+
+        _kubService.CreateClient();
+        await _kubService.ListNamespaces();
     }
+
 }

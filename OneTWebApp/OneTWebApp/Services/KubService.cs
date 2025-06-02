@@ -1,4 +1,5 @@
 using k8s;
+using k8s.Models;
 
 namespace OneTWebApp.Services;
 
@@ -11,18 +12,13 @@ public class KubService {
 
         // Use the config object to create a client.
         _client = new Kubernetes(config);
-        
-        Console.WriteLine("Creating client");
     }
 
-    public void ListNamespaces() {
-        var namespaces = _client.CoreV1.ListNamespace();
-        foreach (var ns in namespaces.Items) {
-            Console.WriteLine(ns.Metadata.Name);
-            var list = _client.CoreV1.ListNamespacedPod(ns.Metadata.Name);
-            foreach (var item in list.Items) {
-                Console.WriteLine(item.Metadata.Name);
-            }
+    public async Task ListNamespaces() {
+        Console.WriteLine(_client.BaseUri);
+        var namespaces = await _client.ListNodeAsync();
+        foreach (var name in namespaces) {
+            Console.WriteLine(name.Name());
         }
     }
 }
