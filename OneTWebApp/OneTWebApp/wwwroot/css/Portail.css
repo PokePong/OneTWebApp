@@ -1,0 +1,21 @@
+.gradient-background {
+    background: radial-gradient(
+            ellipse at top center,
+            #ffb3b3 0%,
+            #ffcdd2 20%,
+            #ffe4f0 40%,
+            #ffffff 90%
+    );
+    width: 100vw;
+    height: 100vh;
+}
+
+.down {
+    margin-top: 75px;
+}
+
+body, html {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}

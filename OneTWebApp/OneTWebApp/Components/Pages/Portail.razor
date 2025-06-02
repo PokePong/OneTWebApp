@@ -2,57 +2,31 @@
 @using OneTWebApp.Client.Models
 @using OneTWebApp.Client.Components
 
-@rendermode InteractiveAuto
-
-<style>
-    .gradient-background {
-        background: radial-gradient(
-            ellipse at top center,
-            #ffb3b3 0%,
-            #ffcdd2 20%,
-            #ffe4f0 40%,
-            #ffffff 90%
-        );
-        width: 100vw;
-        height: 100vh;
-    }
-
-    .down {
-        margin-top: 75px;
-    }
-
-    body, html {
-        overflow: hidden;
-        margin: 0;
-        padding: 0;
-    }
-</style>
+<link rel="stylesheet" href="css/Portail.css">
 
 <div class="gradient-background">
+    
+    <MudGrid AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+        <MudItem xs="3" class="d-flex justify-center align-center">
+            <MudImage Src="Images/icon-s3ns.png" Alt="s3nsImage" Width="100"/>
+        </MudItem>
 
-    <MudStack Row="true"
-              AlignItems="AlignItems.Center"
-              Justify="Justify.SpaceBetween">
-        <MudImage Src="Images/icon-s3ns.png" Alt="s3nsImage" Width="100"/>
-        <MudImage Src="Images/icon-suitenumerique.png" Alt="suiteNumericImage" Width="150"/>
-    </MudStack>
+        <MudItem xs="6" class="d-flex justify-center align-center">
+            <MudText Typo="Typo.h5" Align="Align.Center">Portail S3NS</MudText>
+        </MudItem>
 
-    <MudText Typo="Typo.h3" Align="Align.Center">
-        <b>Welcome to S3NS x LaSuite Portal!</b>
-    </MudText>
+        <MudItem xs="3" class="d-flex justify-center align-center">
+            <MudImage Src="Images/icon-suiteNumerique.png" Alt="suiteNumericImage" Width="150"/>
+        </MudItem>
 
-    <MudSpacer/>
-
-    <ResumeInsight Apps="_apps"/>
-
-    <MudGrid Justify="Justify.SpaceBetween">
-        @foreach (var app in _apps) {
+        @foreach (var app in _apps)
+        {
             <MudItem xs="12" sm="6" class="d-flex justify-center down">
                 <ItemCard AppModel="app"/>
             </MudItem>
         }
     </MudGrid>
-
+    
 </div>
 
 
@@ -75,5 +49,4 @@
             }
         ];
     }
-
 }
