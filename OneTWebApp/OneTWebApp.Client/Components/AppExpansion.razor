@@ -2,6 +2,7 @@
 @using MudBlazor
 @rendermode InteractiveAuto
 @inject IDialogService DialogService
+@inject HttpClient _httpClient
 
 @* Required *@
 <MudThemeProvider/>
@@ -14,17 +15,19 @@
 <MudSnackbarProvider/>
 
 <MudExpansionPanels Class="mt-12">
-    @foreach (var app in _apps) {
+    @foreach (var type in _types) {
         <MudExpansionPanel>
             <TitleContent>
-                <AppPanel AppModel="app"/>
+                <AppPanel Type="type"/>
             </TitleContent>
             <ChildContent>
-                <MudStack Spacing="2">
-                    <InstancePanel/>
-                    <InstancePanel/>
-                    <InstancePanel/>
-                </MudStack>
+                @if (_instances != null) {
+                    <MudStack Spacing="2">
+                        @foreach (var instance in GetInstance(type)!) {
+                            <InstancePanel InstanceModelDTO="instance"/>
+                        }
+                    </MudStack>
+                }
             </ChildContent>
         </MudExpansionPanel>
     }
@@ -32,20 +35,18 @@
 
 @code {
 
-    private AppModel[] _apps;
+    private AppType[] _types = [AppType.Docs, AppType.Meet];
+
+    private List<InstanceModelDTO>? _instances;
 
     protected override async Task OnInitializedAsync() {
         await base.OnInitializedAsync();
 
-        _apps = [
-            new AppModel {
-                AppType = AppType.Docs,
-                DeployedState = DeployState.Undeployed
-            },
-            new AppModel {
-                AppType = AppType.Tchap,
-                DeployedState = DeployState.Undeployed
-            }
-        ];
+        _instances = await _httpClient.GetFromJsonAsync<List<InstanceModelDTO>>("api/Instance");
     }
+
+    private List<InstanceModelDTO>? GetInstance(AppType type) {
+        return _instances?.Where(dto => dto.AppType == type).ToList();
+    }
+
 }
