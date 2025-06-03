@@ -1,5 +1,4 @@
 using MudBlazor.Services;
-using OneTWebApp.Client.Pages;
 using OneTWebApp.Components;
 using OneTWebApp.Services;
 
@@ -10,11 +9,20 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 
+// HttpClient pour appeler les API internes
+
+builder.Services.AddScoped(sp => new HttpClient {
+    BaseAddress = new Uri("http://localhost:5265/")
+});
 //> Added MudBlazor
 builder.Services.AddMudServices();
 
 //> Added Services
 builder.Services.AddScoped<KubService>();
+
+//> Added Controllers
+builder.Services.AddControllers();
+
 
 var app = builder.Build();
 
@@ -30,7 +38,6 @@ else {
 
 app.UseHttpsRedirection();
 
-
 app.UseAntiforgery();
 
 app.MapStaticAssets();
@@ -38,5 +45,7 @@ app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
     .AddInteractiveWebAssemblyRenderMode()
     .AddAdditionalAssemblies(typeof(OneTWebApp.Client._Imports).Assembly);
+
+app.MapControllers();
 
 app.Run();

@@ -1,12 +1,21 @@
 @using OneTWebApp.Client.Models
 @using MudBlazor
 @rendermode InteractiveAuto
+@* Required *@
+<MudThemeProvider/>
+<MudPopoverProvider/>
+
+@* Needed for dialogs *@
+<MudDialogProvider/>
+
+@* Needed for snackbars *@
+<MudSnackbarProvider/>
 
 <MudExpansionPanels>
     @foreach (var app in _apps) {
         <MudExpansionPanel>
             <TitleContent>
-                <AppPanel AppModel="app"/>
+                <AppPanel AppModel="app" CreatedInstance="@(async () => await Test())"/>
             </TitleContent>
             <ChildContent>
                 <MudStack Spacing="2">
@@ -18,6 +27,10 @@
         </MudExpansionPanel>
     }
 </MudExpansionPanels>
+
+<MudButton @onclick="OpenDialogAsync" Variant="Variant.Filled" Color="Color.Primary">
+    Open simple dialog
+</MudButton>
 
 @code {
 
@@ -36,6 +49,17 @@
                 DeployedState = DeployState.Undeployed
             }
         ];
+    }
+
+    private async Task Test() {
+        Console.WriteLine("ab");
+        var res = await _httpClient.GetAsync("api/Instance");
+    }
+
+    private Task OpenDialogAsync() {
+        var options = new DialogOptions { CloseOnEscapeKey = true };
+
+        return DialogService.ShowAsync<DialogUsageExample_Dialog>("Simple Dialog", options);
     }
 
 }

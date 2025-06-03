@@ -14,11 +14,20 @@
     <MudButton Color="Color.Primary"
                Variant="Variant.Filled"
                Size="Size.Small"
-               StartIcon="@Icons.Material.Filled.AddCircleOutline">
+               StartIcon="@Icons.Material.Filled.AddCircleOutline"
+               OnClick="OnCreateInstanceAsync">
         Add new instance
     </MudButton>
 </MudStack>
 
+
 @code {
     [Parameter] public AppModel AppModel { get; set; }
+
+    [Parameter] public EventCallback CreatedInstance { get; set; }
+
+    private async Task OnCreateInstanceAsync() {
+        await CreatedInstance.InvokeAsync();
+    }
+
 }
