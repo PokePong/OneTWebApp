@@ -1,6 +1,9 @@
+@using System.Text.Json.Serialization
 @using OneTWebApp.Client.Models
 @using MudBlazor
 @using OneTWebApp.Client.Utils
+
+@inject HttpClient _httpClient
 
 <MudStack Row="true"
           AlignItems="AlignItems.Center"
@@ -15,7 +18,7 @@
                Variant="Variant.Filled"
                Size="Size.Small"
                StartIcon="@Icons.Material.Filled.AddCircleOutline"
-               OnClick="OnCreateInstanceAsync">
+               OnClick="@(async () => await OnCreateInstanceAsync())">
         Add new instance
     </MudButton>
 </MudStack>
@@ -24,10 +27,13 @@
 @code {
     [Parameter] public AppModel AppModel { get; set; }
 
-    [Parameter] public EventCallback CreatedInstance { get; set; }
 
     private async Task OnCreateInstanceAsync() {
-        await CreatedInstance.InvokeAsync();
+        Console.WriteLine("A");
+        Console.WriteLine(_httpClient.BaseAddress);
+        var res = await _httpClient.GetAsync("api/instance");
+        Console.WriteLine(await res.Content.ReadAsStringAsync());
+        Console.WriteLine("B");
     }
 
 }

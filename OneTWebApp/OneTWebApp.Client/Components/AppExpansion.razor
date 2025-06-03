@@ -16,7 +16,7 @@
     @foreach (var app in _apps) {
         <MudExpansionPanel>
             <TitleContent>
-                <AppPanel AppModel="app" CreatedInstance="@(async () => await Test())"/>
+                <AppPanel AppModel="app"/>
             </TitleContent>
             <ChildContent>
                 <MudStack Spacing="2">
@@ -50,11 +50,6 @@
                 DeployedState = DeployState.Undeployed
             }
         ];
-    }
-
-    private async Task Test() {
-        Console.WriteLine("ab");
-        var res = await _httpClient.GetAsync("api/Instance");
     }
 
     private Task OpenDialogAsync() {
