@@ -23,7 +23,6 @@ builder.Services.AddScoped<KubService>();
 //> Added Controllers
 builder.Services.AddControllers();
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

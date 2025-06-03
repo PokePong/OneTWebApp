@@ -2,6 +2,7 @@
 @using MudBlazor
 @rendermode InteractiveAuto
 @inject IDialogService DialogService
+
 @* Required *@
 <MudThemeProvider/>
 <MudPopoverProvider/>
@@ -12,7 +13,7 @@
 @* Needed for snackbars *@
 <MudSnackbarProvider/>
 
-<MudExpansionPanels>
+<MudExpansionPanels Class="mt-12">
     @foreach (var app in _apps) {
         <MudExpansionPanel>
             <TitleContent>
@@ -28,10 +29,6 @@
         </MudExpansionPanel>
     }
 </MudExpansionPanels>
-
-<MudButton @onclick="OpenDialogAsync" Variant="Variant.Filled" Color="Color.Primary">
-    Open simple dialog
-</MudButton>
 
 @code {
 
@@ -51,11 +48,4 @@
             }
         ];
     }
-
-    private Task OpenDialogAsync() {
-        var options = new DialogOptions { CloseOnEscapeKey = true };
-
-        return DialogService.ShowAsync<DialogUsageExample_Dialog>("Simple Dialog", options);
-    }
-
 }
