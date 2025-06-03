@@ -29,11 +29,9 @@
     [Parameter] public AppModel AppModel { get; set; }
 
     private async Task OnCreateInstanceAsync() {
-        Console.WriteLine("A");
         Console.WriteLine(_httpClient.BaseAddress);
         var res = await _httpClient.GetAsync("api/instance");
         Console.WriteLine(await res.Content.ReadAsStringAsync());
-        Console.WriteLine("B");
     }
     
     private Task OpenDialogAsync() {
