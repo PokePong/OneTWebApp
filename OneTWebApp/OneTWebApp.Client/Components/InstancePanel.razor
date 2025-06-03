@@ -1,4 +1,5 @@
 @using OneTWebApp.Client.Models
+@inject NavigationManager _nav
 <MudStack Row="true"
           AlignItems="AlignItems.Center"
           Justify="Justify.SpaceBetween">
@@ -14,7 +15,8 @@
         <MudIconButton Color="Color.Info"
                        Variant="Variant.Outlined"
                        Size="Size.Small"
-                       Icon="@Icons.Material.Filled.Link"/>
+                       Icon="@Icons.Material.Filled.Link"
+                       OnClick="NavigateToInstance"/>
         <MudButton Color="Color.Error"
                    Variant="Variant.Outlined"
                    Size="Size.Small"
@@ -34,6 +36,10 @@
 
     private async Task OnTerminate() {
         await Terminate.InvokeAsync();
+    }
+
+    private void NavigateToInstance() {
+        _nav.NavigateTo(InstanceModelDTO.Url);
     }
 
 }

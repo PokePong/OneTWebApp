@@ -6,4 +6,6 @@ public class InstanceModelDTO {
     public AppType AppType { get; set; }
 
     public DeployState DeployState { get; set; }
+
+    public string Url { get; set; }
 }

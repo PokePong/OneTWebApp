@@ -1,18 +1,8 @@
 @using OneTWebApp.Client.Models
 @using MudBlazor
 @rendermode InteractiveAuto
-@inject IDialogService DialogService
 @inject HttpClient _httpClient
-
-@* Required *@
-<MudThemeProvider/>
-<MudPopoverProvider/>
-
-@* Needed for dialogs *@
-<MudDialogProvider/>
-
-@* Needed for snackbars *@
-<MudSnackbarProvider/>
+@inject IDialogService DialogService
 
 <MudExpansionPanels Class="mt-12">
     @foreach (var type in _types) {

@@ -29,7 +29,36 @@ public class KubService {
             .GroupBy(p => p.Metadata.Labels["app.kubernetes.io/instance"])
             .ToDictionary(g => g.Key, g => g.ToList());
 
+
         return groupedByInstance.Select(kvp => new InstanceModel { Name = kvp.Key, Pods = kvp.Value }).ToList();
+    }
+
+    public string GetURL(List<V1Pod> pods) {
+        const string envKey = "LOGIN_REDIRECT_URL";
+        foreach (var url in from pod in pods
+                 where pod.Spec.Containers.Count > 0
+                 select pod.Spec.Containers[0]
+                 into container
+                 select container.Env.FirstOrDefault<V1EnvVar>(var => var.Name == envKey)?.Value
+                 into url
+                 where !string.IsNullOrEmpty(url)
+                 select url) {
+            return url;
+        }
+
+        return string.Empty;
+    }
+
+    public async Task DeleteInstances(string labelSelector, string name) {
+        // var pods = await _client.CoreV1.ListPodForAllNamespacesAsync(labelSelector: labelSelector);
+        // var pods = pods.Items
+        //     .Where(p => p.Metadata.Labels.ContainsKey("app.kubernetes.io/instance"))
+        //     .Where(p => p.Metadata.Labels["app.kubernetes.io/instance"] == name)
+        //     .ToList();
+        //
+        // foreach (var pod in pods) {
+        //     _client.DeleteNamespacedPodAsync(pod.Metadata.Namespace(), pod.pa)
+        // }
     }
 
     private void PrintInstance(List<InstanceModel> instances) {

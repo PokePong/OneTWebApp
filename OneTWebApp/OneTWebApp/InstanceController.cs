@@ -18,14 +18,16 @@ public class InstanceController(KubService kubService) : ControllerBase {
         var docs = docsInstances.Select(instance => new InstanceModelDTO {
             DeployState = DeployState.Running,
             AppType = AppType.Docs,
-            Name = instance.Name
+            Name = instance.Name,
+            Url = kubService.GetURL(instance.Pods)
         });
 
         var meetInstances = await kubService.ListRunningInstances(LabelSelectorMeet);
         var meets = meetInstances.Select(instance => new InstanceModelDTO {
             DeployState = DeployState.Running,
             AppType = AppType.Meet,
-            Name = instance.Name
+            Name = instance.Name,
+            Url = kubService.GetURL(instance.Pods)
         });
 
         var res = docs.Concat(meets);
