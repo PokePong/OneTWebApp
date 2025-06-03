@@ -1,61 +1,54 @@
 @using OneTWebApp.Client.Models
 @using MudBlazor
 @rendermode InteractiveAuto
-@inject IDialogService DialogService
-@* Required *@
-<MudThemeProvider/>
-<MudPopoverProvider/>
 
-@* Needed for dialogs *@
-<MudDialogProvider/>
-
-@* Needed for snackbars *@
-<MudSnackbarProvider/>
+@inject HttpClient _httpClient
 
 <MudExpansionPanels>
-    @foreach (var app in _apps) {
+    @foreach (var type in _types) {
         <MudExpansionPanel>
             <TitleContent>
-                <AppPanel AppModel="app"/>
+                <AppPanel Type="type"/>
             </TitleContent>
             <ChildContent>
                 <MudStack Spacing="2">
-                    <InstancePanel/>
-                    <InstancePanel/>
-                    <InstancePanel/>
+                    @if (_instances != null) {
+                        @foreach (var instance in GetInstances(type)!) {
+                            <InstancePanel InstanceModelDTO="instance"/>
+                        }
+                    }
                 </MudStack>
             </ChildContent>
         </MudExpansionPanel>
     }
 </MudExpansionPanels>
 
-<MudButton @onclick="OpenDialogAsync" Variant="Variant.Filled" Color="Color.Primary">
-    Open simple dialog
-</MudButton>
+@* <MudButton @onclick="OpenDialogAsync" Variant="Variant.Filled" Color="Color.Primary"> *@
+@*     Open simple dialog *@
+@* </MudButton> *@
 
 @code {
 
-    private AppModel[] _apps;
+    private AppType[] _types = [AppType.Docs, AppType.Meet];
+
+    private List<InstanceModelDTO>? _instances;
+
+    private List<InstanceModelDTO>? InstanceDocs => _instances?.Where(dto => dto.AppType == AppType.Docs).ToList();
 
     protected override async Task OnInitializedAsync() {
         await base.OnInitializedAsync();
 
-        _apps = [
-            new AppModel {
-                AppType = AppType.Docs,
-                DeployedState = DeployState.Undeployed
-            },
-            new AppModel {
-                AppType = AppType.Tchap,
-                DeployedState = DeployState.Undeployed
-            }
-        ];
+        _instances = await _httpClient.GetFromJsonAsync<List<InstanceModelDTO>>("api/instance");
     }
 
-    private Task OpenDialogAsync() {
-        var options = new DialogOptions { CloseOnEscapeKey = true };
-
-        return DialogService.ShowAsync<DialogUsageExample_Dialog>("Simple Dialog", options);
+    private List<InstanceModelDTO>? GetInstances(AppType type) {
+        return _instances?.Where(dto => dto.AppType == type).ToList();
     }
+
+    // private Task OpenDialogAsync() {
+    //     var options = new DialogOptions { CloseOnEscapeKey = true };
+    //
+    //     return DialogService.ShowAsync<DialogUsageExample_Dialog>("Simple Dialog", options);
+    // }
 
 }

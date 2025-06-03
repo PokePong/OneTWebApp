@@ -29,7 +29,7 @@
         <MudText Align="Align.Center"
                  Color="Color.Success"
                  Typo="Typo.h4">
-            <b>@Apps.Select(model => model.DeployedState == DeployState.Deployed).Count()</b>
+            <b>@Apps.Select(model => model.DeployedState == DeployState.Running).Count()</b>
         </MudText>
         <MudText Align="Align.Center"
                  Color="Color.Default"
@@ -58,9 +58,6 @@
 @code {
 
     [Parameter] public AppModel[] Apps { get; set; }
-
-    protected override void OnInitialized() {
-        base.OnInitialized();
-    }
+    
 
 }

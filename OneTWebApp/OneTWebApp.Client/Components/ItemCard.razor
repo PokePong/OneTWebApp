@@ -39,7 +39,7 @@
         AppModel.DeployedState switch {
             DeployState.Undeployed => Color.Default,
             DeployState.Deploying => Color.Warning,
-            DeployState.Deployed => Color.Success,
+            DeployState.Running => Color.Success,
             DeployState.Failed => Color.Error,
             _ => throw new ArgumentOutOfRangeException()
         };

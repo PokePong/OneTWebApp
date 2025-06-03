@@ -1,24 +1,39 @@
-@using MudBlazor
+@using OneTWebApp.Client.Models
 <MudStack Row="true"
           AlignItems="AlignItems.Center"
           Justify="Justify.SpaceBetween">
     <MudText Align="Align.Center"
              Color="Color.Default"
              Typo="Typo.body1">
-        ID: 1265-2369
+        <b>@(InstanceModelDTO.Name)</b>
     </MudText>
-    <MudIconButton Color="Color.Info"
+    <MudStack Spacing="2"
+              Row="true"
+              AlignItems="AlignItems.Center"
+              Justify="Justify.Center">
+        <MudIconButton Color="Color.Info"
+                       Variant="Variant.Outlined"
+                       Size="Size.Small"
+                       Icon="@Icons.Material.Filled.Link"/>
+        <MudButton Color="Color.Error"
                    Variant="Variant.Outlined"
                    Size="Size.Small"
-                   Icon="@Icons.Material.Filled.Link"/>
-    <MudButton Color="Color.Error"
-               Variant="Variant.Outlined"
-               Size="Size.Small"
-               StartIcon="@Icons.Material.Filled.DoNotDisturbAlt">
-        Terminate
-    </MudButton>
+                   StartIcon="@Icons.Material.Filled.DoNotDisturbAlt"
+                   OnClick="OnTerminate">
+            Terminate
+        </MudButton>
+    </MudStack>
+
 </MudStack>
 
 @code {
+
+    [Parameter] public InstanceModelDTO InstanceModelDTO { get; set; }
+
+    [Parameter] public EventCallback Terminate { get; set; }
+
+    private async Task OnTerminate() {
+        await Terminate.InvokeAsync();
+    }
 
 }
