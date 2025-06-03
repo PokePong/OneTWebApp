@@ -1,59 +1,36 @@
 @page "/"
-@using OneTWebApp.Client.Models
 @using OneTWebApp.Client.Components
 
 <link rel="stylesheet" href="css/Portail.css">
 
-<div class="gradient-background">
+@* <div class="gradient-background"> *@
+@* *@
+@* </div> *@
 
-    <MudStack Row="true"
-              AlignItems="AlignItems.Center"
-              Justify="Justify.SpaceBetween">
-        <MudImage Src="Images/icon-s3ns.png" Alt="s3nsImage" Width="100"/>
-        <MudImage Src="Images/icon-suitenumerique.png" Alt="suiteNumericImage" Width="150"/>
-    </MudStack>
+<MudStack Row="true"
+          AlignItems="AlignItems.Center"
+          Justify="Justify.SpaceBetween">
+    <MudImage Src="Images/icon-s3ns.png" Alt="s3nsImage" Width="200"/>
+    <MudImage Src="Images/icon-suitenumerique.png" Alt="suiteNumericImage" Width="300"/>
+</MudStack>
 
-    <MudText Typo="Typo.h3" Align="Align.Center">
-        <b>Welcome to S3NS x LaSuite Portal!</b>
-    </MudText>
+<MudText Typo="Typo.h3" Align="Align.Center">
+    <b>Welcome to S3NS x LaSuite Portal!</b>
+</MudText>
 
-    <MudSpacer/>
+<MudSpacer/>
 
-    <ResumeInsight Apps="_apps"/>
+@* <MudGrid Justify="Justify.SpaceBetween"> *@
+@*     @foreach (var app in _apps) { *@
+@*         <MudItem xs="12" sm="6" class="d-flex justify-center down"> *@
+@*             <ItemCard AppModel="app"/> *@
+@*         </MudItem> *@
+@*     } *@
+@* </MudGrid> *@
 
-    <MudGrid Justify="Justify.SpaceBetween">
-        @foreach (var app in _apps) {
-            <MudItem xs="12" sm="6" class="d-flex justify-center down">
-                <ItemCard AppModel="app"/>
-            </MudItem>
-        }
-    </MudGrid>
-
-</div>
+<AppExpansion/>
 
 
 @code {
-
-    private AppModel[] _apps;
-
-    protected override async Task OnInitializedAsync() {
-        await base.OnInitializedAsync();
-
-        _apps = [
-            new AppModel {
-                AppType = AppType.Docs,
-                DeployedState = DeployState.Undeployed,
-                Version = "2.1.3"
-            },
-            new AppModel {
-                AppType = AppType.Tchap,
-                DeployedState = DeployState.Undeployed,
-                Version = "1.0.1"
-            }
-        ];
-
-        _kubService.CreateClient();
-        await _kubService.ListNamespaces();
-    }
 
 }
