@@ -2,25 +2,22 @@
 @using MudBlazor
 @using OneTWebApp.Client.Utils
 
-@* <MudPaper Class="rounded-3 w-100" *@
-@*           Style="max-height: 60px"> *@
-    <MudStack Row="true"
-              AlignItems="AlignItems.Center"
-              Justify="Justify.SpaceBetween">
-        <MudAvatar Style="height:50px; width:50px; font-size:1.5rem;"
-                   Class="p-2"
-                   Color="Color.Primary"
-                   Variant="Variant.Outlined">
-            <MudImage Src="@(ImageUtils.GetIconAppPath(AppModel.AppType))"></MudImage>
-        </MudAvatar>
-        <MudButton Color="Color.Primary"
-                   Variant="Variant.Filled"
-                   Size="Size.Small"
-                   StartIcon="@Icons.Material.Filled.AddCircleOutline">
-            Add new instance
-        </MudButton>
-    </MudStack>
-@* </MudPaper> *@
+<MudStack Row="true"
+          AlignItems="AlignItems.Center"
+          Justify="Justify.SpaceBetween">
+    <MudAvatar Style="height:50px; width:50px; font-size:1.5rem;"
+               Class="p-2"
+               Color="Color.Primary"
+               Variant="Variant.Outlined">
+        <MudImage Src="@(ImageUtils.GetIconAppPath(AppModel.AppType))"></MudImage>
+    </MudAvatar>
+    <MudButton Color="Color.Primary"
+               Variant="Variant.Filled"
+               Size="Size.Small"
+               StartIcon="@Icons.Material.Filled.AddCircleOutline">
+        Add new instance
+    </MudButton>
+</MudStack>
 
 @code {
     [Parameter] public AppModel AppModel { get; set; }

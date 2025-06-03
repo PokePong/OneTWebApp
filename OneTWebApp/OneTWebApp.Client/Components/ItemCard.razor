@@ -24,10 +24,6 @@
                      Align="Align.Center">
                 <b>@(AppModel.AppType.ToString())</b>
             </MudText>
-            <MudText Typo="Typo.body2"
-                     Align="Align.Center">
-                v@(AppModel.Version)
-            </MudText>
         </MudStack>
 
         <DeployStateButton State="AppModel.DeployedState"

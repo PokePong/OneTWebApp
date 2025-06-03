@@ -9,7 +9,11 @@
                 <AppPanel AppModel="app"/>
             </TitleContent>
             <ChildContent>
-                Panel Content
+                <MudStack Spacing="2">
+                    <InstancePanel/>
+                    <InstancePanel/>
+                    <InstancePanel/>
+                </MudStack>
             </ChildContent>
         </MudExpansionPanel>
     }
@@ -25,13 +29,11 @@
         _apps = [
             new AppModel {
                 AppType = AppType.Docs,
-                DeployedState = DeployState.Undeployed,
-                Version = "2.1.3"
+                DeployedState = DeployState.Undeployed
             },
             new AppModel {
                 AppType = AppType.Tchap,
-                DeployedState = DeployState.Undeployed,
-                Version = "1.0.1"
+                DeployedState = DeployState.Undeployed
             }
         ];
     }
