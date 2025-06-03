@@ -1,6 +1,9 @@
+@using System.Text.Json.Serialization
 @using OneTWebApp.Client.Models
+@using MudBlazor
 @using OneTWebApp.Client.Utils
-
+@rendermode InteractiveAuto
+@inject IDialogService DialogService
 @inject HttpClient _httpClient
 
 <MudStack Row="true"
@@ -10,23 +13,30 @@
                Class="p-2"
                Color="Color.Primary"
                Variant="Variant.Outlined">
-        <MudImage Src="@(ImageUtils.GetIconAppPath(Type))"></MudImage>
+        <MudImage Src="@(ImageUtils.GetIconAppPath(AppModel.AppType))"></MudImage>
     </MudAvatar>
     <MudButton Color="Color.Primary"
                Variant="Variant.Filled"
                Size="Size.Small"
-               StartIcon="@Icons.Material.Filled.AddCircleOutline">
+               StartIcon="@Icons.Material.Filled.AddCircleOutline"
+               @onclick="OpenDialogAsync"
+               @OnClick="@(async () => await OnCreateInstanceAsync())">
         Add new instance
     </MudButton>
 </MudStack>
 
-
 @code {
-    [Parameter] public AppType Type { get; set; }
+    [Parameter] public AppModel AppModel { get; set; }
 
-
-    // private async Task OnCreateInstanceAsync() {
-    //     var res = await _httpClient.GetAsync("api/instance");
-    // }
+    private async Task OnCreateInstanceAsync() {
+        Console.WriteLine(_httpClient.BaseAddress);
+        var res = await _httpClient.GetAsync("api/instance");
+        Console.WriteLine(await res.Content.ReadAsStringAsync());
+    }
+    
+    private Task OpenDialogAsync() {
+        var options = new DialogOptions { CloseOnEscapeKey = true };
+        return DialogService.ShowAsync<NameForm>("Simple Dialog", options);
+    }
 
 }

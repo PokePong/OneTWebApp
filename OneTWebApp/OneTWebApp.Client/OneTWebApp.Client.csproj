@@ -19,6 +19,13 @@
       <Content Include="..\..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
+      <Content Update="Components\NameForm.razor.css">
+        <DependentUpon>NameForm.razor</DependentUpon>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Components\Layout\MainLayout.razor" />
     </ItemGroup>
 
 </Project>
